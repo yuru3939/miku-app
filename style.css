@@ -1,0 +1,180 @@
+body {
+    margin: 0;
+    overflow: hidden;
+
+    background: #111;
+    color: white;
+
+    font-family: sans-serif;
+}
+
+/* =========================
+   タイトル画面
+========================= */
+
+#title-screen {
+
+    position: absolute;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#title {
+
+    font-size: 72px;
+    letter-spacing: 5px;
+}
+
+#start-text {
+
+    margin-top: 20px;
+
+    opacity: 0.7;
+
+    animation: blink 1.5s infinite;
+}
+
+/* 点滅 */
+@keyframes blink {
+
+    0% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.2;
+    }
+}
+
+/* =========================
+   波紋
+========================= */
+
+#ripple {
+
+    position: absolute;
+
+    width: 20px;
+    height: 20px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.3);
+
+    transform: scale(0);
+
+    pointer-events: none;
+
+    z-index: 9999;
+}
+
+/* 波紋アニメ */
+.ripple-animation {
+
+    animation: rippleEffect 0.8s ease-out forwards;
+}
+
+@keyframes rippleEffect {
+
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(100);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   楽曲選択
+========================= */
+
+#song-screen {
+
+    position: absolute;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
+
+    transition: 1s;
+}
+
+/* 最初は非表示 */
+.hidden {
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+/* 曲カード */
+.song-card {
+
+    width: 300px;
+
+    padding: 20px;
+
+    background: rgba(255,255,255,0.1);
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+/* マウス乗せた時 */
+.song-card:hover {
+
+    transform: scale(1.05);
+
+    background: rgba(255,255,255,0.2);
+}
+
+/* 追加 */
+#lyric-screen {
+
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #111;
+}
+
+#lyric-text {
+
+    font-size: 64px;
+    color: white;
+
+    text-align: center;
+
+    letter-spacing: 5px;
+}
