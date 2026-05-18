@@ -2,7 +2,6 @@ const bgmPlayer = document.getElementById("bgmPlayer");
 
 const songs = document.querySelectorAll(".song-card");
 
-const songScreen = document.getElementById("song-screen");
 const lyricScreen = document.getElementById("lyric-screen");
 const lyricText = document.getElementById("lyric-text");
 
@@ -35,9 +34,10 @@ songs.forEach(card => {
         bgmPlayer.play().catch(() => {});
 
         // 画面切替
-        songScreen.classList.add("hidden");
+          const gameScreen = document.getElementById("game-screen");
+          songScreen.classList.add("hidden");
 
-        lyricScreen.classList.remove("hidden");
+          gameScreen.classList.remove("hidden");
 
         // 歌詞開始
         playLyrics(lyricsData[songId]);

@@ -178,3 +178,22 @@ body {
 
     letter-spacing: 5px;
 }
+
+#game-screen {
+
+    position: absolute;
+
+    width: 100%;
+    height: 100vh;
+
+    background: black;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+
+    font-size: 64px;
+}
