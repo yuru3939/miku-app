@@ -13,6 +13,7 @@ let bgmStarted = false;
 
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
 
+function run(src){
 const player = new Player({
     app: {token:"BFWsFTi8eAJBC7UW"},
     //mediaElement: document.querySelector("#media")
@@ -27,7 +28,7 @@ const rewindBtn = document.querySelector("#rewind");
 
 player.addListener({
     onAppReady(app){
-        player.createFromSongUrl(songUrl);
+        player.createFromSongUrl(src);
         console.log("aaaaaaaaaaaaa");
         playBtn.addEventListener("click", () => player.video && player.requestPlay());
     jumpBtn.addEventListener("click", () => player.video && player.requestMediaSeek(player.video.firstPhrase.startTime));
@@ -49,7 +50,7 @@ player.addListener({
   //}
 }
 });
-
+}
 const animateWord = function (now, unit) {
   if (unit.contains(now)) {
     document.querySelector("#text").textContent = unit.text;
@@ -90,3 +91,6 @@ function playBGM() {
         bgmStarted = true;
     }
 }
+
+window.globalFunction = {};
+window.globalFunction.run = run;
