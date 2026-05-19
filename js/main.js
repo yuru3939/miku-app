@@ -19,7 +19,7 @@ const lyricsData = {
 songs.forEach(card => {
 
     card.addEventListener("click", () => {
-
+        console.log("aaaaa");
         // 曲
         const src = card.getAttribute("data-src");
 
@@ -38,7 +38,7 @@ songs.forEach(card => {
           songScreen.classList.add("hidden");
 
           gameScreen.classList.remove("hidden");
-
+        lyricScreen.classList.remove("hidden");
         // 歌詞開始
         playLyrics(lyricsData[songId]);
 

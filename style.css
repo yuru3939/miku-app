@@ -197,3 +197,25 @@ body {
 
     font-size: 64px;
 }
+
+#media {
+    position: absolute;
+    right: 10px;
+    bottom: 30px;
+}
+
+#control {
+    position: absolute;
+    left: 10px;
+    bottom: 30px;
+    padding: 5px;
+    background: rgba(255,0,0,0.2);
+}
+  
+  #control > button {
+    margin-right: 5px;
+  }
+  #control > button:last-child {
+    margin-right: 0;
+  }
+
