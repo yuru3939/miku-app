@@ -12,70 +12,82 @@
 
         <h1 id="title">マジカルミライ2026</h1>
         <p id="start-text">Click to Start</p>
-
+        
     </div>
 
     <!-- 波紋 -->
     <div id="ripple"></div>
 
     <!-- 楽曲選択 -->
-     <div id="song-screen" class="hidden">
+    <div id="song-screen" class="hidden">
 
-     <h2>SONG SELECT</h2>
+        <h2>SONG SELECT</h2>
 
 
-     <!-- ゲーム画面 -->
-     <div id="game-screen" class="hidden">
-
-      <h1>GAME START</h1>
-
-        </div>
+     
+      
         
-    <div class="song-card"
-     data-song="miku"
-     data-src="sound/BGM/みんなみくみくにしてあげる♪.wav">
-    ミクミクにしてあげる！！！
-</div>
+        
 
-    <div class="song-card"
-    data-song="sora"
-    data-src="sound/BGM/song2.mp3">
-    空に免じて
-    </div>
+        <div class="song-card"
+            data-song="kotae"
+            data-src="https://piapro.jp/t/6W2N/20251215164617">
+            こたえて
+        </div>
 
-    <div class="song-card"
-    data-song="kotae"
-    data-src="sound/BGM/こたえて (feat. 初音ミク&鏡音リン&鏡音レン&巡音ルカ&MEIKO&KAITO) - imie.mp3">
-    こたえて
-    </div>
+        <div class="song-card"
+            data-song="ka-tenn"
+            data-src="https://piapro.jp/t/zoqO/20251214200738">
+            アフター・ザ・カーテン
+        </div>
 
-    <div class="song-card"
-    data-song="ka-tenn"
-    data-src="sound/BGM/song4.mp3">
-    アフター・ザ・カーテン
-    </div>
+        <div class="song-card"
+            data-song="tyannsu"
+            data-src="https://piapro.jp/t/PNpQ/20251209170719">
+            シャッターチャンス
+        </div>
 
-    <div class="song-card"
-    data-song="tyannsu"
-    data-src="sound/BGM/song5.mp3">
-    シャッターチャンス
-    </div>
+        <div class="song-card"
+            data-song="sekai"
+            data-src="https://piapro.jp/t/B3yJ/20251215061727">
+            世界最後の音楽隊
+        </div>
 
-    <div class="song-card"
-    data-song="sekai"
-    data-src="sound/BGM/song6.mp3">
-    世界最後の音楽隊
-       </div>
+        <div class="song-card"
+            data-song="miku"
+            data-src="https://piapro.jp/t/QBdL/20251215094303">
+            トリツクロジー
+        </div>
 
+        <div class="song-card"
+            data-song="sora"
+            data-src="https://piapro.jp/t/E2i3/20251215092113">
+            TAKEOVER
+        </div>
     </div>
 
        <!-- 歌詞画面 --->
-        <div id="lyric-screen" class="hidden">
-        <div id="lyric-text"></div>
-       </div>
+    <div id="lyric-screen" class="hidden">
+        <!-- ゲーム画面 -->
+        <div id="game-screen" class="hidden">
+        
+            <h1>GAME START</h1>
 
-      <!-- 曲再生用 -->
-       <audio id="bgmPlayer"></audio>
+        </div>
+        <div id="lyric-text"></div>
+        <div id="media"></div>
+        <div id="control" style="display: block;">
+            <button id="play" disabled>再生</button>
+            <button id="jump" disabled>歌詞頭出し</button>
+            <button id="pause" disabled>一時停止</button>
+            <button id="rewind" disabled>巻き戻し</button>
+            <span id="position"><strong>-</strong> [ms]</span>
+        </div>
+    </div>
+       
+
+     
+     
 
 
     <!-- 効果音 -->
@@ -85,7 +97,10 @@
     <audio id="bgm"
     src="sound/BGM/みんなみくみくにしてあげる♪.wav"
     loop></audio>
-
+    
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
+    
     <!-- JavaScript -->
     <script src="js/audio.js"></script>
     <script src="js/title.js"></script>
