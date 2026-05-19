@@ -21,7 +21,8 @@ const lyricsData = {
 songs.forEach(card => {
 
     card.addEventListener("click", () => {
-        console.log("aaaaa");
+        console.log("setBGM");
+        playSE();
         // 曲
         src = card.getAttribute("data-src");
         
@@ -35,7 +36,7 @@ songs.forEach(card => {
         const gameScreen = document.getElementById("game-screen");
         songScreen.classList.add("hidden");
 
-        gameScreen.classList.remove("hidden");
+        //gameScreen.classList.remove("hidden");
         lyricScreen.classList.remove("hidden");
         // 歌詞開始
         playLyrics(lyricsData[songId]);
@@ -66,6 +67,5 @@ function playLyrics(lyrics) {
     }
 
     showNext();
-
 }
 
