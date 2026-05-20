@@ -132,6 +132,19 @@ body {
     gap: 20px;
 
     transition: 1s;
+
+    background:
+    linear-gradient(
+    rgba(0,0,0,0.3),
+    rgba(0,0,0,0.3)
+    ),
+    url("image/haiukei.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
 }
 
 /* 最初は非表示 */
@@ -149,9 +162,9 @@ body {
 
     padding: 20px;
 
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.30);
 
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(255,255,255,0.4);
 
     text-align: center;
 
