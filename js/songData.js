@@ -59,7 +59,7 @@ const songData = {
         lyricId: 126593,
         lyricDiffId: 28630
     },
-    TAKEOVER2: {
+    TAKEOVER: {
         url: "https://piapro.jp/t/E2i3/20251215092113",
         // 音楽地図訂正履歴
         beatId: 4827298,
