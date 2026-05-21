@@ -21,24 +21,23 @@ const lyricsData = {
 songs.forEach(card => {
 
     card.addEventListener("click", () => {
-        console.log("aaaaa");
-        // 曲
-        src = card.getAttribute("data-src");
-        
+        console.log("setBGM");
+        playSE();
+
         // 曲ID
-        const songId = card.getAttribute("data-song");
+        let songName = card.getAttribute("data-song");
 
         // 曲再生
-        window.globalFunction.run(src);
+        window.globalFunction.run(songName);
 
         // 画面切替
         const gameScreen = document.getElementById("game-screen");
         songScreen.classList.add("hidden");
 
-        gameScreen.classList.remove("hidden");
+        //gameScreen.classList.remove("hidden");
         lyricScreen.classList.remove("hidden");
-        // 歌詞開始
-        playLyrics(lyricsData[songId]);
+        // 歌詞開始(旧)
+        //playLyrics(lyricsData[songId]);
 
     });
 
@@ -66,6 +65,5 @@ function playLyrics(lyrics) {
     }
 
     showNext();
-
 }
 

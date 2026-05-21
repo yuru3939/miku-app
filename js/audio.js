@@ -1,8 +1,8 @@
-const audio = document.getElementById("audio");
+const se = document.getElementById("se");
 const bgm = document.getElementById("bgm");
 const {Player} = TextAliveApp;
 // 音量
-audio.volume = 0.5;
+se.volume = 0.5;
 bgm.volume = 0.3;
 
 // 音解禁済み？
@@ -12,50 +12,69 @@ let unlocked = false;
 let bgmStarted = false;
 
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
-
-function run(src){
-const player = new Player({
-    app: {token:"BFWsFTi8eAJBC7UW"},
-    //mediaElement: document.querySelector("#media")
-});
-
-const playBtn = document.querySelector("#play");
-const jumpBtn = document.querySelector("#jump");
-const pauseBtn = document.querySelector("#pause");
-const rewindBtn = document.querySelector("#rewind");
-
-
-
-player.addListener({
-    onAppReady(app){
-        player.createFromSongUrl(src);
-        console.log("aaaaaaaaaaaaa");
-        playBtn.addEventListener("click", () => player.video && player.requestPlay());
-    jumpBtn.addEventListener("click", () => player.video && player.requestMediaSeek(player.video.firstPhrase.startTime));
-    pauseBtn.addEventListener("click", () => player.video && player.requestPause());
-    rewindBtn.addEventListener("click", () => player.video && player.requestMediaSeek(0));
-    },
-    onTimerReady() {
-  document
-    .querySelectorAll("button")
-    .forEach((btn) => (btn.disabled = false));
-    
-  //let p = player.video.firstPhrase;
-  //jumpBtn.disabled = !p;
-
-  // set `animate` method
-  //while (p && p.next) {
-    //p.animate = animatePhrase;
-    //p = p.next;
-  //}
-}
-});
-}
-const animateWord = function (now, unit) {
+const animatePhrase = function (now, unit) {
   if (unit.contains(now)) {
-    document.querySelector("#text").textContent = unit.text;
+    document.querySelector("#text p").textContent = unit.text;
   }
 };
+function run(songName){
+    const player = new Player({
+        app: {token:"BFWsFTi8eAJBC7UW"},
+        mediaElement: document.querySelector("#media")
+    });
+
+    const playBtn = document.querySelector("#play");
+    const jumpBtn = document.querySelector("#jump");
+    const pauseBtn = document.querySelector("#pause");
+    const rewindBtn = document.querySelector("#rewind");
+
+
+
+    player.addListener({
+        onAppReady(app){
+            console.log("AppReady");
+            songInfo = songData[songName];
+            player.createFromSongUrl(songInfo.url,{
+                video: {
+                    beatId: songInfo.beatId,
+                    chordId: songInfo.chordId,
+                    repetitiveSegmentId: songInfo.repetitiveSegmentId,
+
+                    lyricId: songInfo.lyricId,
+                    lyricDiffId: songInfo.lyricDiffId
+                },
+            });
+            
+            playBtn.addEventListener("click", () => player.video && player.requestPlay());
+            jumpBtn.addEventListener("click", () => player.video && player.requestMediaSeek(player.video.firstPhrase.startTime));
+            pauseBtn.addEventListener("click", () => player.video && player.requestPause());
+            rewindBtn.addEventListener("click", () => player.video && player.requestMediaSeek(0));
+        },
+        onTimerReady() {
+            document
+                .querySelectorAll("button")
+                .forEach((btn) => (btn.disabled = false));
+            console.log("ready");
+            console.log("beatId:" + player.data.songMap.revisions.beatId);
+            console.log("chordId:" + player.data.songMap.revisions.chordId);
+            console.log("repetitiveSegemntId:" + player.data.songMap.revisions.repetitiveSegmentId);
+            console.log("lyricId:" + player.data.video.lyricId);
+            console.log("lyricDiffId:" + player.data.video.lyricDiffId);
+            let p = player.video.firstWord;
+            jumpBtn.disabled = !p;
+
+            // set `animate` method
+            while (p && p.next) {
+                p.animate = animatePhrase;
+                p = p.next;
+            }
+            if(!p.next){
+                p.animate = animatePhrase;
+            }
+        }
+    });
+}
+
 // 最初のクリックで音解禁
 function unlockAudio() {
 
@@ -75,9 +94,9 @@ function unlockAudio() {
 // 効果音再生
 function playSE() {
 
-    audio.currentTime = 0;
+    se.currentTime = 0;
 
-    audio.play().catch(() => {});
+    se.play().catch(() => {});
 }
 
 // BGM再生

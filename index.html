@@ -30,37 +30,37 @@
         
 
         <div class="song-card"
-            data-song="kotae"
+            data-song="こたえて"
             data-src="https://piapro.jp/t/6W2N/20251215164617">
             こたえて
         </div>
 
         <div class="song-card"
-            data-song="ka-tenn"
+            data-song="アフター・ザ・カーテン"
             data-src="https://piapro.jp/t/zoqO/20251214200738">
             アフター・ザ・カーテン
         </div>
 
         <div class="song-card"
-            data-song="tyannsu"
+            data-song="シャッターチャンス"
             data-src="https://piapro.jp/t/PNpQ/20251209170719">
             シャッターチャンス
         </div>
 
         <div class="song-card"
-            data-song="sekai"
+            data-song="世界最後の音楽隊"
             data-src="https://piapro.jp/t/B3yJ/20251215061727">
             世界最後の音楽隊
         </div>
 
         <div class="song-card"
-            data-song="miku"
+            data-song="トリツクロジー"
             data-src="https://piapro.jp/t/QBdL/20251215094303">
             トリツクロジー
         </div>
 
         <div class="song-card"
-            data-song="sora"
+            data-song="TAKEOVER"
             data-src="https://piapro.jp/t/E2i3/20251215092113">
             TAKEOVER
         </div>
@@ -68,12 +68,7 @@
 
        <!-- 歌詞画面 --->
     <div id="lyric-screen" class="hidden">
-        <!-- ゲーム画面 -->
-        <div id="game-screen" class="hidden">
         
-            <h1>GAME START</h1>
-
-        </div>
         <div id="lyric-text"></div>
         <div id="media"></div>
         <div id="control" style="display: block;">
@@ -83,6 +78,7 @@
             <button id="rewind" disabled>巻き戻し</button>
             <span id="position"><strong>-</strong> [ms]</span>
         </div>
+        <div id="text"><p>あいうえお</p></div>
     </div>
        
 
@@ -91,17 +87,18 @@
 
 
     <!-- 効果音 -->
-    <audio id="audio" src="sound/Clap.mp3"></audio>
+    <audio id="se" src="./sound/Clap.mp3"></audio>
 
     <!-- BGM -->
     <audio id="bgm"
-    src="sound/BGM/みんなみくみくにしてあげる♪.wav"
+    src="./sound/BGM/みんなみくみくにしてあげる♪.wav"
     loop></audio>
     
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
     
     <!-- JavaScript -->
+    <script src="js/songData.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/title.js"></script>
     <script src="js/main.js"></script>
