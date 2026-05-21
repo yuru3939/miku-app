@@ -1,8 +1,8 @@
-const audio = document.getElementById("audio");
+const se = document.getElementById("se");
 const bgm = document.getElementById("bgm");
 const {Player} = TextAliveApp;
 // 音量
-audio.volume = 0.5;
+se.volume = 0.5;
 bgm.volume = 0.3;
 
 // 音解禁済み？
@@ -17,7 +17,7 @@ const animatePhrase = function (now, unit) {
     document.querySelector("#text p").textContent = unit.text;
   }
 };
-function run(src){
+function run(songName){
     const player = new Player({
         app: {token:"BFWsFTi8eAJBC7UW"},
         mediaElement: document.querySelector("#media")
@@ -33,7 +33,17 @@ function run(src){
     player.addListener({
         onAppReady(app){
             console.log("AppReady");
-            player.createFromSongUrl(src);
+            songInfo = songData[songName];
+            player.createFromSongUrl(songInfo.url,{
+                video: {
+                    beatId: songInfo.beatId,
+                    chordId: songInfo.chordId,
+                    repetitiveSegmentId: songInfo.repetitiveSegmentId,
+
+                    lyricId: songInfo.lyricId,
+                    lyricDiffId: songInfo.lyricDiffId
+                },
+            });
             
             playBtn.addEventListener("click", () => player.video && player.requestPlay());
             jumpBtn.addEventListener("click", () => player.video && player.requestMediaSeek(player.video.firstPhrase.startTime));
@@ -44,14 +54,22 @@ function run(src){
             document
                 .querySelectorAll("button")
                 .forEach((btn) => (btn.disabled = false));
-    
-            let p = player.video.firstPhrase;
+            console.log("ready");
+            console.log("beatId:" + player.data.songMap.revisions.beatId);
+            console.log("chordId:" + player.data.songMap.revisions.chordId);
+            console.log("repetitiveSegemntId:" + player.data.songMap.revisions.repetitiveSegmentId);
+            console.log("lyricId:" + player.data.video.lyricId);
+            console.log("lyricDiffId:" + player.data.video.lyricDiffId);
+            let p = player.video.firstWord;
             jumpBtn.disabled = !p;
 
             // set `animate` method
             while (p && p.next) {
                 p.animate = animatePhrase;
                 p = p.next;
+            }
+            if(!p.next){
+                p.animate = animatePhrase;
             }
         }
     });
@@ -76,9 +94,9 @@ function unlockAudio() {
 // 効果音再生
 function playSE() {
 
-    audio.currentTime = 0;
+    se.currentTime = 0;
 
-    audio.play().catch(() => {});
+    se.play().catch(() => {});
 }
 
 // BGM再生
