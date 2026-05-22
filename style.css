@@ -205,7 +205,7 @@ body {
     letter-spacing: 5px;
 }
 
-#game-screen {
+/*#game-screen {
 
     position: absolute;
 
@@ -222,7 +222,7 @@ body {
     color: white;
 
     font-size: 64px;
-}
+}*/
 
 #media {
     position: absolute;
@@ -244,4 +244,78 @@ body {
   #control > button:last-child {
     margin-right: 0;
   }
+
+/* =========================
+   ゲーム画面
+========================= */
+
+#game-screen {
+
+    position: absolute;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+/* 湖 */
+#lake {
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+    linear-gradient(
+        to bottom,
+        #d6f7ff,
+    #8fe0fb,
+    #5cc8ec,
+    #5cc8ec
+    );
+
+     repeating-linear-gradient(
+            90deg,
+            rgba(255,255,255,0.03),
+            rgba(255,255,255,0.03) 2px,
+            transparent 2px,
+            transparent 20px
+        );
+    /* 
+    url("image/lake.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+    */
+}
+
+/* ボート */
+#boat {
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: url("image/bo-tokari.png");
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    z-index: 10;
+}
+
+
+
 
