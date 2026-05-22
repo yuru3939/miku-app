@@ -297,7 +297,7 @@ body {
 /* ボート */
 #boat {
 
-    position: absolute;
+   position: absolute;
 
     width: 100px;
     height: 100px;
@@ -305,10 +305,7 @@ body {
     left: 50%;
     top: 50%;
 
-    transform: translate(-50%, -50%);
-
     background: url("image/bo-tokari.png");
-
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;

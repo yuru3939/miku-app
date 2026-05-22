@@ -69,3 +69,32 @@ function playLyrics(lyrics) {
     showNext();
 }
 
+
+const boat = document.getElementById("boat");
+
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
+
+let boatX = mouseX;
+let boatY = mouseY;
+
+window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+function animateBoat() {
+
+    boatX += (mouseX - boatX) * 0.05;
+    boatY += (mouseY - boatY) * 0.05;
+
+    boat.style.left = boatX + "px";
+    boat.style.top = boatY + "px";
+
+    requestAnimationFrame(animateBoat);
+    
+    console.log("boat test");
+}
+animateBoat();
+
+
