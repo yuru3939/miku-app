@@ -35,8 +35,8 @@ songs.forEach(card => {
         songScreen.classList.add("hidden");
 
         //gameScreen.classList.remove("hidden");
-        //lyricScreen.classList.remove("hidden");
-        gameScreen.classList.remove("hidden");
+        lyricScreen.classList.remove("hidden");
+        //gameScreen.classList.remove("hidden");
 
         // 歌詞開始(旧)
         //playLyrics(lyricsData[songId]);

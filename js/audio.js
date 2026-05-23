@@ -12,11 +12,34 @@ let unlocked = false;
 let bgmStarted = false;
 
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
+let a = document.querySelector("#text p");
+let tes;
+function changetext(unit){
+    if(tes != unit.text){
+        tes = unit.text;
+        return true;
+    }
+    return false;
+    
+}
 const animatePhrase = function (now, unit) {
   if (unit.contains(now)) {
-    document.querySelector("#text p").textContent = unit.text;
+    if(changetext(unit)){
+        console.log("changetext");
+        a.classList.remove("touch");
+    }
+    
+    //console.log(unit.progress(now));
+    console.log("text:" + unit.text);
+    a.textContent = unit.text;
   }
+  
 };
+
+a.addEventListener("click", function(){
+    a.classList.add("touch");
+});
+
 function run(songName){
     const player = new Player({
         app: {token:"BFWsFTi8eAJBC7UW"},
@@ -65,11 +88,17 @@ function run(songName){
 
             // set `animate` method
             while (p && p.next) {
+                console.log("firstphrase:" + p + "| next:" + p.next);
                 p.animate = animatePhrase;
+                
                 p = p.next;
+
+                
             }
+            console.log("p.class?" + p.children.children);
             if(!p.next){
                 p.animate = animatePhrase;
+                
             }
         }
     });

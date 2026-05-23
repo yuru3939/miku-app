@@ -154,7 +154,9 @@ body {
     pointer-events: none;
 
 }
-
+.touch {
+    color:#5cc8ec;
+}
 /* 曲カード */
 .song-card {
 
@@ -276,13 +278,13 @@ body {
     #5cc8ec
     );
 
-     repeating-linear-gradient(
+    /*repeating-linear-gradient(
             90deg,
             rgba(255,255,255,0.03),
             rgba(255,255,255,0.03) 2px,
             transparent 2px,
             transparent 20px
-        );
+        );*/
     /* 
     url("image/lake.jpg");
 
