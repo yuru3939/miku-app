@@ -70,7 +70,7 @@ function playLyrics(lyrics) {
 }
 
 
-const boat = document.getElementById("boat");
+/*const boat = document.getElementById("boat");
 
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
@@ -85,8 +85,8 @@ window.addEventListener("mousemove", (e) => {
 
 function animateBoat() {
 
-    boatX += (mouseX - boatX) * 0.05;
-    boatY += (mouseY - boatY) * 0.05;
+    boatX += (mouseX - boatX) * 0.01;
+    boatY += (mouseY - boatY) * 0.01;
 
     boat.style.left = boatX + "px";
     boat.style.top = boatY + "px";
@@ -96,5 +96,40 @@ function animateBoat() {
     console.log("boat test");
 }
 animateBoat();
+*/
+
+const world = document.getElementById("world");
+
+let mouseX = 0;
+let mouseY = 0;
+
+window.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+
+
+let worldX = 0;
+let worldY = 0;
+
+function animateWorld() {
+
+    const dx = mouseX - window.innerWidth / 2;
+    const dy = mouseY - window.innerHeight / 2;
+
+    worldX += (-dx - worldX) * 0.05;
+    worldY += (-dy - worldY) * 0.05;
+
+    world.style.transform = `translate(${worldX}px, ${worldY}px)`;
+
+    requestAnimationFrame(animateWorld);
+}
+
+animateWorld();
+
+
+
+
 
 
