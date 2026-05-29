@@ -1,11 +1,12 @@
 body {
     margin: 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
 
     background: #111;
     color: white;
 
     font-family: sans-serif;
+    
 }
 
 /* =========================
@@ -186,7 +187,7 @@ body {
 /* 追加 */
 #lyric-screen {
 
-    position: absolute;
+    position: static;
     width: 100%;
     height: 100vh;
 
@@ -195,6 +196,7 @@ body {
     align-items: center;
 
     background: #111;
+
 }
 
 #lyric-text {
@@ -230,12 +232,13 @@ body {
     position: absolute;
     right: 10px;
     bottom: 30px;
+    z-index: 10;
 }
 
 #control {
     position: absolute;
-    left: 10px;
-    bottom: 30px;
+    
+    bottom: 100px;
     padding: 5px;
     background: rgba(255,0,0,0.2);
 }
@@ -259,7 +262,40 @@ body {
     height: 100vh;
 
     overflow: hidden;
+
+    position: relative; /* ←これ重要 */
 }
+
+
+/* =========================
+   黒帯
+========================= */
+
+#top-bar,
+#bottom-bar {
+
+    position: absolute;
+
+    width: 100%;
+    height: 90px;/* 高さ調整 */
+
+    background: rgba(0,0,0,0.80);
+
+    /*background: black;*/
+
+    z-index: 100;
+}
+
+/* 上 */
+#top-bar {
+    top: 0;
+}
+
+/* 下 */
+#bottom-bar {
+    bottom: 0;
+}
+
 
 /* 湖 */
 #lake {
@@ -284,20 +320,11 @@ body {
             rgba(255,255,255,0.03) 2px,
             transparent 2px,
             transparent 20px
-        );*/
-    /* 
-    url("image/lake.jpg");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-    */
+        );
 }
 
 /* ボート */
-#boat {
+/*#boat {
 
    position: absolute;
 
@@ -314,7 +341,41 @@ body {
 
     z-index: 10;
 }
+*/
+#world {
+     position: absolute;
+    width: 100%;
+    height: 100%;
+
+    z-index: 1;
+}
+
+#boat {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+#miku {
+
+    position: absolute;
+
+    width: 300px;
+    height: 500px;
+
+    left: 5px;
+    bottom: -30px;
+
+    background: url("image/ミクピアノ2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    z-index: 20;
+}
 
 
 
-
+}
