@@ -151,12 +151,11 @@ body {
 /* 最初は非表示 */
 .hidden {
     visibility: hidden;
-
     pointer-events: none;
 
 }
 .touch {
-    color:#5cc8ec;
+    color:#5cc8ec !important;
 }
 /* 曲カード */
 .song-card {
@@ -375,36 +374,31 @@ body {
 
     z-index: 20;
 }
+.txt {
+    color: #fff;
+    text-align: center;
+    letter-spacing: 2px;
+}
 
-
+#songArtist,
 #songTitle {
     position: absolute;
     top: 20px;
     left: 20px;
     font-size: 24px;
-    color: white;
-    text-align: center;
-    letter-spacing: 2px;
 }
 #songArtist {
     position: absolute;
     top: 50px;
     left: 20px;
     font-size: 18px;
-    color: white;
-    text-align: center;
-    letter-spacing: 2px;
+    
 }
 #phraseContent {
     font-size: 24px;
-    color: white;
-    text-align: center;
-    letter-spacing: 2px;
 }
 
 #wordText {
+    color: #fff;
     font-size: 50px;
-    color: white;
-    text-align: center;
-    letter-spacing: 2px;
 }

@@ -49,6 +49,7 @@ const animatePhrase = function (now, unit) {
   
 };
 a.addEventListener("click", function(){
+    console.log("click");
     a.classList.add("touch");
 });
 
