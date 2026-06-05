@@ -12,7 +12,7 @@ let unlocked = false;
 let bgmStarted = false;
 
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
-let a = document.querySelector("#text p");
+let a = document.querySelector("#wordText");
 let tes;
 function changetext(unit){
     if(tes != unit.text){
@@ -22,7 +22,7 @@ function changetext(unit){
     return false;
     
 }
-const animatePhrase = function (now, unit) {
+const animateWord = function (now, unit) {
   if (unit.contains(now)) {
     if(changetext(unit)){
         console.log("changetext");
@@ -35,7 +35,19 @@ const animatePhrase = function (now, unit) {
   }
   
 };
-
+const animatePhrase = function (now, unit) {
+  if (unit.contains(now)) {
+    if(changetext(unit)){
+        console.log("changePhrase");
+        document.getElementById("phraseText").classList.remove("touch");
+    }
+    
+    //console.log(unit.progress(now));
+    console.log("text:" + unit.text);
+    document.getElementById("phraseText").textContent = unit.text;
+  }
+  
+};
 a.addEventListener("click", function(){
     a.classList.add("touch");
 });
@@ -73,6 +85,18 @@ function run(songName){
             pauseBtn.addEventListener("click", () => player.video && player.requestPause());
             rewindBtn.addEventListener("click", () => player.video && player.requestMediaSeek(0));
         },
+
+        onVideoReady(video) {
+            console.log("VideoReady");
+            console.log(player.data.song.name);
+            tmp_name = player.data.song.name;
+            
+            document.getElementById("songTitle").textContent = tmp_name;
+            console.log(player.data.song.artist.name);
+            tmp_artist_name = player.data.song.artist.name;
+            document.getElementById("songArtist").textContent = tmp_artist_name;
+        },
+
         onTimerReady() {
             document
                 .querySelectorAll("button")
@@ -84,12 +108,13 @@ function run(songName){
             console.log("lyricId:" + player.data.video.lyricId);
             console.log("lyricDiffId:" + player.data.video.lyricDiffId);
             let p = player.video.firstWord;
+            let phraseP = player.video.firstPhrase;
             jumpBtn.disabled = !p;
 
             // set `animate` method
             while (p && p.next) {
                 console.log("firstphrase:" + p + "| next:" + p.next);
-                p.animate = animatePhrase;
+                p.animate = animateWord;
                 
                 p = p.next;
 
@@ -97,7 +122,15 @@ function run(songName){
             }
             console.log("p.class?" + p.children.children);
             if(!p.next){
-                p.animate = animatePhrase;
+                p.animate = animateWord;
+                
+            }
+            while (phraseP && phraseP.next) {
+                console.log("firstphrase:" + phraseP + "| next:" + phraseP.next);
+                phraseP.animate = animatePhrase;
+                
+                phraseP = phraseP.next;
+
                 
             }
         }
