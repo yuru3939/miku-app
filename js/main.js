@@ -38,6 +38,7 @@ songs.forEach(card => {
         //lyricScreen.classList.remove("hidden");
         gameScreen.classList.remove("hidden");
 
+        spawnLyric("aaaaaaaaaaaaaaaaaaa");
         // 歌詞開始(旧)
         //playLyrics(lyricsData[songId]);
 
@@ -131,5 +132,32 @@ animateWorld();
 
 
 
+// 歌詞飛ばし
+function spawnLyric(text) {
 
+    const container =
+        document.getElementById("lyrics-container");
+
+    const lyric =
+        document.createElement("div");
+
+    lyric.classList.add("fly-lyric");
+
+    lyric.textContent = text;
+
+    /* 出現位置 */
+    const spawn = document.getElementById("spawn-point");
+
+　　　　lyric.style.left = spawn.offsetLeft + "px";
+　　　　lyric.style.top = spawn.offsetTop + "px";
+
+    container.appendChild(lyric);
+
+    setTimeout(() => {
+        lyric.remove();
+    }, 3000);
+
+}
+
+console.log("歌詞生成");
 
