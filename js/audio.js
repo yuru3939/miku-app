@@ -12,11 +12,42 @@ let unlocked = false;
 let bgmStarted = false;
 
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
+let a = document.querySelector("#wordText");
+let tes;
+function changetext(unit){
+    if(tes != unit.text){
+        tes = unit.text;
+        return true;
+    }
+    return false;
+    
+}
+const animateWord = function (now, unit) {
+  if (unit.contains(now)) {
+    if(changetext(unit)){
+        console.log("changetext");
+        console.log("text:" + unit.text);
+        a.classList.remove("touch");
+    }
+    
+    //console.log(unit.progress(now));
+    a.textContent = unit.text;
+  }
+  
+};
 const animatePhrase = function (now, unit) {
   if (unit.contains(now)) {
-    document.querySelector("#text p").textContent = unit.text;
+    //console.log(unit.progress(now));
+    //console.log("phrase:" + unit.text);
+    document.getElementById("phraseText").textContent = unit.text;
   }
+  
 };
+a.addEventListener("click", function(){
+    console.log("click");
+    a.classList.add("touch");
+});
+
 function run(songName){
     const player = new Player({
         app: {token:"BFWsFTi8eAJBC7UW"},
@@ -50,6 +81,18 @@ function run(songName){
             pauseBtn.addEventListener("click", () => player.video && player.requestPause());
             rewindBtn.addEventListener("click", () => player.video && player.requestMediaSeek(0));
         },
+
+        onVideoReady(video) {
+            console.log("VideoReady");
+            console.log(player.data.song.name);
+            tmp_name = player.data.song.name;
+            
+            document.getElementById("songTitle").textContent = tmp_name;
+            console.log(player.data.song.artist.name);
+            tmp_artist_name = player.data.song.artist.name;
+            document.getElementById("songArtist").textContent = tmp_artist_name;
+        },
+
         onTimerReady() {
             document
                 .querySelectorAll("button")
@@ -61,16 +104,32 @@ function run(songName){
             console.log("lyricId:" + player.data.video.lyricId);
             console.log("lyricDiffId:" + player.data.video.lyricDiffId);
             let p = player.video.firstWord;
+            let phraseP = player.video.firstPhrase;
             jumpBtn.disabled = !p;
 
             // set `animate` method
             while (p && p.next) {
-                p.animate = animatePhrase;
+                console.log("firstphrase:" + p + "| next:" + p.next);
+                p.animate = animateWord;
                 p = p.next;
             }
+            console.log("p.class?" + p.children.children);
             if(!p.next){
-                p.animate = animatePhrase;
+                p.animate = animateWord;
+                
             }
+            while (phraseP && phraseP.next) {
+                console.log("firstphrase:" + phraseP + "| next:" + phraseP.next);
+                phraseP.animate = animatePhrase;
+                phraseP = phraseP.next;
+            }
+            if(!phraseP.next){
+                phraseP.animate = animatePhrase;
+            }
+        },
+        onTimeUpdate() {
+            //console.log("update");
+            console.log(player.findBeat(player.timer.position).position);
         }
     });
 }

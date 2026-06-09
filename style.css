@@ -1,11 +1,12 @@
 body {
     margin: 0;
     overflow: hidden;
-
-    background: #111;
+    position: relative;
+    background: #ff0000;
     color: white;
 
     font-family: sans-serif;
+    
 }
 
 /* =========================
@@ -149,12 +150,13 @@ body {
 
 /* 最初は非表示 */
 .hidden {
-    opacity: 0;
-
+    visibility: hidden;
     pointer-events: none;
 
 }
-
+.touch {
+    color:#5cc8ec !important;
+}
 /* 曲カード */
 .song-card {
 
@@ -187,12 +189,13 @@ body {
     position: absolute;
     width: 100%;
     height: 100vh;
-
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background: #111;
+    /*background: #111;*/
+
 }
 
 #lyric-text {
@@ -228,12 +231,13 @@ body {
     position: absolute;
     right: 10px;
     bottom: 30px;
+    z-index: 10;
 }
 
 #control {
     position: absolute;
-    left: 10px;
-    bottom: 30px;
+    
+    bottom: 100px;
     padding: 5px;
     background: rgba(255,0,0,0.2);
 }
@@ -258,7 +262,7 @@ body {
 
     overflow: hidden;
 
-    position: relative; /* ←これ重要 */
+    /*position: relative;*/ 
 }
 
 
@@ -309,13 +313,13 @@ body {
     #5cc8ec
     );
 
-     repeating-linear-gradient(
+    /*repeating-linear-gradient(
             90deg,
             rgba(255,255,255,0.03),
             rgba(255,255,255,0.03) 2px,
             transparent 2px,
             transparent 20px
-        );
+        );*/
 }
 
 /* ボート */
@@ -370,8 +374,34 @@ body {
 
     z-index: 20;
 }
+.txt {
+    color: #fff;
+    text-align: center;
+    letter-spacing: 2px;
+}
 
+#songArtist,
+#songTitle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+}
+#songArtist {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    font-size: 18px;
+    
+}
+#phraseContent {
+    font-size: 24px;
+}
 
+#wordText {
+    color: #fff;
+    font-size: 50px;
+}
 
 
 
@@ -442,7 +472,6 @@ body {
 
 /* =========================
    歌詞生成スポナー
-========================= */
 #spawn-point {
 
     position: absolute;

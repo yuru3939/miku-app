@@ -67,8 +67,23 @@
     </div>
 
       <!-- ゲーム画面 -->
-<div id="game-screen" class="hidden">
+    <div id="game-screen" class="hidden">
+        <!-- 黒帯 -->
+        <div id="top-bar">
+            <div class="txt">
+                <span  id="songTitle">-</span>
+                <span  id="songArtist">-</span>
+            </div>
+        </div>
 
+        <div id="bottom-bar">
+            <div id="media"></div>
+            <div id="phraseLyric">
+                <span class="txt" id="phraseContent">
+                    <p >-<em id="phraseText"></em>-</p>
+                </span>
+            </div>
+        </div>
 　　 <!-- 歌詞飛ばし -->
 　　<div id="lyrics-container"></div>
 
@@ -76,16 +91,16 @@
     <div id="top-bar"></div>
     <div id="bottom-bar"></div>
 
-    <!-- 湖 -->
-    <div id="world"></div>
-    <div id="lake"></div>
+        <!-- 湖 -->
+        <div id="world"></div>
+        <div id="lake"></div>
 
-    <!-- ボート -->
-    <div id="boat"></div>
+        <!-- ボート -->
+        <div id="boat"></div>
 
-    <!-- ピアノ＆ミク -->
-    <div id="miku"></div>
-    <div id="piano"></div>
+        <!-- ピアノ＆ミク -->
+        <div id="miku"></div>
+        <div id="piano"></div>
 
     <div id="spawn-point"></div>
     
@@ -95,8 +110,8 @@
        <!-- 歌詞画面 --->
     <div id="lyric-screen" class="hidden">
         
-        <div id="lyric-text"></div>
-        <div id="media"></div>
+        <div id="lyric-text"></div> <!-- 不使用 -->
+        
         <div id="control" style="display: block;">
             <button id="play" disabled>再生</button>
             <button id="jump" disabled>歌詞頭出し</button>
@@ -104,7 +119,7 @@
             <button id="rewind" disabled>巻き戻し</button>
             <span id="position"><strong>-</strong> [ms]</span>
         </div>
-        <div id="text"><p>あいうえお</p></div>
+        <div id="WordLyric"><p class="txt" id="wordText">test</p></div>
     </div>
        
 

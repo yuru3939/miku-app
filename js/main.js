@@ -34,9 +34,9 @@ songs.forEach(card => {
         const gameScreen = document.getElementById("game-screen");
         songScreen.classList.add("hidden");
 
-        //gameScreen.classList.remove("hidden");
-        //lyricScreen.classList.remove("hidden");
         gameScreen.classList.remove("hidden");
+        lyricScreen.classList.remove("hidden");
+        //gameScreen.classList.remove("hidden");
 
         spawnLyric("aaaaaaaaaaaaaaaaaaa");
         // 歌詞開始(旧)
