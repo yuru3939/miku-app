@@ -26,24 +26,19 @@ const animateWord = function (now, unit) {
   if (unit.contains(now)) {
     if(changetext(unit)){
         console.log("changetext");
+        console.log("text:" + unit.text);
         a.classList.remove("touch");
     }
     
     //console.log(unit.progress(now));
-    console.log("text:" + unit.text);
     a.textContent = unit.text;
   }
   
 };
 const animatePhrase = function (now, unit) {
   if (unit.contains(now)) {
-    if(changetext(unit)){
-        console.log("changePhrase");
-        document.getElementById("phraseText").classList.remove("touch");
-    }
-    
     //console.log(unit.progress(now));
-    console.log("text:" + unit.text);
+    //console.log("phrase:" + unit.text);
     document.getElementById("phraseText").textContent = unit.text;
   }
   
@@ -116,10 +111,7 @@ function run(songName){
             while (p && p.next) {
                 console.log("firstphrase:" + p + "| next:" + p.next);
                 p.animate = animateWord;
-                
                 p = p.next;
-
-                
             }
             console.log("p.class?" + p.children.children);
             if(!p.next){
@@ -129,11 +121,15 @@ function run(songName){
             while (phraseP && phraseP.next) {
                 console.log("firstphrase:" + phraseP + "| next:" + phraseP.next);
                 phraseP.animate = animatePhrase;
-                
                 phraseP = phraseP.next;
-
-                
             }
+            if(!phraseP.next){
+                phraseP.animate = animatePhrase;
+            }
+        },
+        onTimeUpdate() {
+            //console.log("update");
+            console.log(player.findBeat(player.timer.position).position);
         }
     });
 }
