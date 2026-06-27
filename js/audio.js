@@ -17,22 +17,51 @@ let tes;
 function changetext(unit){
     if(tes != unit.text){
         tes = unit.text;
+        
         return true;
     }
+    
     return false;
     
 }
+let progressTime = 1;
+let stt = 0;
 const animateWord = function (now, unit) {
-  if (unit.contains(now)) {
-    if(changetext(unit)){
+  if (unit.startTime <= now && unit.endTime > now) {
+    if(stt >  musicPosition){
+        console.log("a");
+        return;
+    }
+    /*if(changetext(unit)){
         console.log("changetext");
         console.log("text:" + unit.text);
         a.classList.remove("touch");
     }
     
     //console.log(unit.progress(now));
-    a.textContent = unit.text;
+    a.textContent = unit.text;*/
+    //console.log("unit.progress:" + unit.progress(now));
+    
+    if(progressTime > unit.progress(now)){
+        console.log("changetext");
+        console.log("progressTime:" + progressTime);
+        console.log("unit.progress:" + unit.progress(now));
+        console.log("text:" + unit.text);
+        a.classList.remove("touch");
+        const spawn = document.getElementById("spawn-point");
+        a.style.left = spawn.offsetLeft + "px";
+        a.style.top = spawn.offsetTop + "px";
+        a.classList.remove("fly-lyric");
+        progressTime = unit.progress(now);
+        a.textContent = unit.text;
+        return;
+    }
+    a.classList.add("fly-lyric");
+    //console.log(unit.progress(now));
+    
+    progressTime = unit.progress(now);
   }
+
   
 };
 const animatePhrase = function (now, unit) {
@@ -40,6 +69,7 @@ const animatePhrase = function (now, unit) {
     //console.log(unit.progress(now));
     //console.log("phrase:" + unit.text);
     document.getElementById("phraseText").textContent = unit.text;
+
   }
   
 };
@@ -75,7 +105,7 @@ function run(songName){
                     lyricDiffId: songInfo.lyricDiffId
                 },
             });
-            
+            player.video && (stt = player.video.firstPhrase.startTime);
             playBtn.addEventListener("click", () => player.video && player.requestPlay());
             jumpBtn.addEventListener("click", () => player.video && player.requestMediaSeek(player.video.firstPhrase.startTime));
             pauseBtn.addEventListener("click", () => player.video && player.requestPause());
@@ -105,7 +135,7 @@ function run(songName){
             console.log("lyricDiffId:" + player.data.video.lyricDiffId);
             let p = player.video.firstWord;
             let phraseP = player.video.firstPhrase;
-            jumpBtn.disabled = !p;
+            jumpBtn.disabled = !phraseP;
 
             // set `animate` method
             while (p && p.next) {
@@ -127,9 +157,12 @@ function run(songName){
                 phraseP.animate = animatePhrase;
             }
         },
-        onTimeUpdate() {
+        onTimeUpdate(position) {
             //console.log("update");
+            musicPosition = position;
             console.log(player.findBeat(player.timer.position).position);
+            console.log("a",unit.progress(now));
+            console.log("b",player.timer.position);
         }
     });
 }

@@ -155,7 +155,7 @@ body {
 
 }
 .touch {
-    color:#5cc8ec !important;
+    color:#ff0000 !important;
 }
 /* 曲カード */
 .song-card {
@@ -399,8 +399,10 @@ body {
 }
 
 #wordText {
+    opacity: 0;
     color: #fff;
     font-size: 50px;
+
 }
 
 
