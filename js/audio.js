@@ -39,7 +39,7 @@ const animateWord = function (now, unit) {
         let nowText = document.createElement('p');
         nowText.textContent = unit.text;
         nowText.style.left = SpawnOffsetLeft + "px";
-        nowText.style.top = SpawnOffsetTop + "px";
+        nowText.style.top = SpawnOffsetTop + Math.random() * 100 - 100 + "px";
         nowText.classList.add("txt");
         nowText.classList.add("fly-lyric");
         wordContainer.appendChild(nowText);

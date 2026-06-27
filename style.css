@@ -448,7 +448,7 @@ body {
 
     color: rgba(255,255,255,0.9);
 
-    font-size: 60px;
+    font-size: 80px;
 
       animation: lyricFly 3s ease-in-out forwards;
 }
@@ -471,7 +471,7 @@ body {
         opacity: 0;
 
         transform:
-          translate(200px, -180px)
+          translate(1200px, -180px)
           rotate(-8deg)
           scale(1.2);
     }
