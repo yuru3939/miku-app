@@ -16,6 +16,8 @@ const spawn = document.getElementById("spawn-point");
 const SpawnOffsetLeft = spawn.offsetLeft;
 const SpawnOffsetTop = spawn.offsetTop;
 let tes;
+const scoreBoard = document.querySelector("#scoreBoard");
+let score = 0;
 function changetext(unit){
     if(tes != unit.text){
         tes = unit.text;
@@ -72,6 +74,8 @@ b.addEventListener("click", function(event){
     if(!event.target.classList.contains("touch")){
         event.target.classList.add("touch");
         console.log("click");
+        score += 100;
+        scoreBoard.textContent = "score:" + score;
     }
     
 });
