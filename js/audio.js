@@ -12,7 +12,9 @@ let unlocked = false;
 let bgmStarted = false;
 
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
-let a = document.querySelector("#wordText");
+const spawn = document.getElementById("spawn-point");
+const SpawnOffsetLeft = spawn.offsetLeft;
+const SpawnOffsetTop = spawn.offsetTop;
 let tes;
 function changetext(unit){
     if(tes != unit.text){
@@ -33,38 +35,23 @@ const animateWord = function (now, unit) {
         console.log("a");
         return;
     }
-    /*if(changetext(unit)){
-        console.log("changetext");
-        console.log("text:" + unit.text);
-        a.classList.remove("touch");
-    }
-    
-    //console.log(unit.progress(now));
-    a.textContent = unit.text;*/
-    //console.log("unit.progress:" + unit.progress(now));
-    
+
     if(progressTime > unit.progress(now)){
         console.log("changetext");
         console.log("progressTime:" + progressTime);
         console.log("unit.progress:" + unit.progress(now));
         console.log("text:" + unit.text);
-        a.classList.remove("touch");
-        const spawn = document.getElementById("spawn-point");
-        a.style.left = spawn.offsetLeft + "px";
-        a.style.top = spawn.offsetTop + "px";
-        a.classList.remove("fly-lyric");
+
         progressTime = unit.progress(now);
-        a.textContent = unit.text;
         var nowText = document.createElement('p');
         nowText.textContent = unit.text;
+        nowText.style.left = SpawnOffsetLeft + "px";
+        nowText.style.top = SpawnOffsetTop + "px";
         nowText.classList.add("txt");
         nowText.classList.add("fly-lyric");
         b.appendChild(nowText);
         return;
     }
-    a.classList.add("fly-lyric");
-    //console.log(unit.progress(now));
-    
     progressTime = unit.progress(now);
   }
 
@@ -81,6 +68,7 @@ const animatePhrase = function (now, unit) {
 };
 
 b.addEventListener("click", function(event){
+    if(event.target.tagName !== "P") return;
     if(!event.target.classList.contains("touch")){
         event.target.classList.add("touch");
         console.log("click");
@@ -88,10 +76,7 @@ b.addEventListener("click", function(event){
     
 });
 
-a.addEventListener("click", function(){
-    console.log("click");
-    a.classList.add("touch");
-});
+
 
 function run(songName){
     const player = new Player({
@@ -175,9 +160,17 @@ function run(songName){
         onTimeUpdate(position) {
             //console.log("update");
             musicPosition = position;
-            console.log(player.findBeat(player.timer.position).position);
-            console.log("a",unit.progress(now));
-            console.log("b",player.timer.position);
+            //console.log(player.findBeat(player.timer.position).position);
+            //console.log("a",unit.progress(now));
+            //console.log("b",player.timer.position);
+
+            var flyText = document.querySelector(".fly-lyric");
+            var styles = window.getComputedStyle(flyText);
+            var opac = styles.getPropertyValue('opacity');
+            //console.log("opacity",opac);
+            if(opac == 0){
+                flyText.remove();
+            }
         }
     });
 }
