@@ -155,7 +155,8 @@ body {
 
 }
 .touch {
-    color:#5cc8ec !important;
+    color:#ff0000 !important;
+    pointer-events: none;
 }
 /* 曲カード */
 .song-card {
@@ -342,7 +343,7 @@ body {
 }
 */
 #world {
-     position: absolute;
+    position: absolute;
     width: 100%;
     height: 100%;
 
@@ -378,6 +379,7 @@ body {
     color: #fff;
     text-align: center;
     letter-spacing: 2px;
+    user-select: none;
 }
 
 #songArtist,
@@ -392,15 +394,22 @@ body {
     top: 50px;
     left: 20px;
     font-size: 18px;
-    
+}
+#scoreBoard {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    font-size: 24px;
 }
 #phraseContent {
     font-size: 24px;
 }
 
 #wordText {
+    opacity: 0;
     color: #fff;
     font-size: 50px;
+
 }
 
 
@@ -447,7 +456,7 @@ body {
 @keyframes lyricFly {
 
     0% {
-        opacity: 0;
+        opacity: 0.1;
 
         transform:
             translate(0px, 0px)
@@ -462,7 +471,7 @@ body {
         opacity: 0;
 
         transform:
-          translate(200px, -180px)
+          translate(1200px, -180px)
           rotate(-8deg)
           scale(1.2);
     }
@@ -480,7 +489,7 @@ body {
     width: 10px;
     height: 10px;
 
-    left: 200px;   /* ←弦の位置に調整 */
+    left: 300px;   /* ←弦の位置に調整 */
     top: 450px;    /* ←弦の位置に調整 */
 
     pointer-events: none;

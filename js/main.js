@@ -147,10 +147,9 @@ function spawnLyric(text) {
 
     /* 出現位置 */
     const spawn = document.getElementById("spawn-point");
-
-　　　　lyric.style.left = spawn.offsetLeft + "px";
-　　　　lyric.style.top = spawn.offsetTop + "px";
-
+        lyric.style.left = spawn.offsetLeft + "px";
+        lyric.style.top = spawn.offsetTop + "px";
+        
     container.appendChild(lyric);
 
     setTimeout(() => {

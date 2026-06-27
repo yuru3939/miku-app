@@ -12,41 +12,67 @@ let unlocked = false;
 let bgmStarted = false;
 
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
-let a = document.querySelector("#wordText");
-let tes;
-function changetext(unit){
-    if(tes != unit.text){
-        tes = unit.text;
-        return true;
-    }
-    return false;
-    
-}
+const spawn = document.getElementById("spawn-point");
+const SpawnOffsetLeft = spawn.offsetLeft;
+const SpawnOffsetTop = spawn.offsetTop;
+const scoreBoard = document.querySelector("#scoreBoard");
+let score = 0;
+
+let progressTime = 1;
+let stt = 0;
+const wordContainer = document.querySelector("#wordLyric");
+//　単語表示
 const animateWord = function (now, unit) {
-  if (unit.contains(now)) {
-    if(changetext(unit)){
-        console.log("changetext");
-        console.log("text:" + unit.text);
-        a.classList.remove("touch");
+  if (unit.startTime <= now && unit.endTime > now) {
+    if(stt >  musicPosition){
+        console.log("posError");
+        return;
     }
-    
-    //console.log(unit.progress(now));
-    a.textContent = unit.text;
+    //表示初期化
+    if(progressTime > unit.progress(now)){
+        console.log("changetext");
+        console.log("progressTime:" + progressTime);
+        console.log("unit.progress:" + unit.progress(now));
+        console.log("text:" + unit.text);
+
+        progressTime = unit.progress(now);
+        let nowText = document.createElement('p');
+        nowText.textContent = unit.text;
+        nowText.style.left = SpawnOffsetLeft + "px";
+        nowText.style.top = SpawnOffsetTop + Math.random() * 100 - 100 + "px";
+        nowText.classList.add("txt");
+        nowText.classList.add("fly-lyric");
+        wordContainer.appendChild(nowText);
+        return;
+    }
+    progressTime = unit.progress(now);
   }
+
   
 };
+//　下部フレーズの表示
 const animatePhrase = function (now, unit) {
   if (unit.contains(now)) {
     //console.log(unit.progress(now));
     //console.log("phrase:" + unit.text);
     document.getElementById("phraseText").textContent = unit.text;
+
   }
   
 };
-a.addEventListener("click", function(){
-    console.log("click");
-    a.classList.add("touch");
+// クリック判定
+wordContainer.addEventListener("click", function(event){
+    if(event.target.tagName !== "P") return;
+    if(!event.target.classList.contains("touch")){
+        event.target.classList.add("touch");
+        console.log("click");
+        score += 100;
+        scoreBoard.textContent = "score:" + score;
+    }
+    
 });
+
+
 
 function run(songName){
     const player = new Player({
@@ -75,7 +101,7 @@ function run(songName){
                     lyricDiffId: songInfo.lyricDiffId
                 },
             });
-            
+            player.video && (stt = player.video.firstPhrase.startTime);
             playBtn.addEventListener("click", () => player.video && player.requestPlay());
             jumpBtn.addEventListener("click", () => player.video && player.requestMediaSeek(player.video.firstPhrase.startTime));
             pauseBtn.addEventListener("click", () => player.video && player.requestPause());
@@ -105,7 +131,7 @@ function run(songName){
             console.log("lyricDiffId:" + player.data.video.lyricDiffId);
             let p = player.video.firstWord;
             let phraseP = player.video.firstPhrase;
-            jumpBtn.disabled = !p;
+            jumpBtn.disabled = !phraseP;
 
             // set `animate` method
             while (p && p.next) {
@@ -127,9 +153,20 @@ function run(songName){
                 phraseP.animate = animatePhrase;
             }
         },
-        onTimeUpdate() {
+        onTimeUpdate(position) {
             //console.log("update");
-            console.log(player.findBeat(player.timer.position).position);
+            musicPosition = position;
+            //console.log(player.findBeat(player.timer.position).position);
+            //console.log("a",unit.progress(now));
+            //console.log("b",player.timer.position);
+
+            let flyText = document.querySelector(".fly-lyric");
+            let styles = getComputedStyle(flyText);
+            let opac = styles.getPropertyValue('opacity');
+            //console.log("opacity",opac);
+            if(opac == 0){
+                flyText.remove();
+            }
         }
     });
 }
