@@ -482,7 +482,7 @@ body {
     width: 10px;
     height: 10px;
 
-    left: 200px;   /* ←弦の位置に調整 */
+    left: 400px;   /* ←弦の位置に調整 */
     top: 450px;    /* ←弦の位置に調整 */
 
     pointer-events: none;

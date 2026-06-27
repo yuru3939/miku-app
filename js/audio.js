@@ -26,6 +26,7 @@ function changetext(unit){
 }
 let progressTime = 1;
 let stt = 0;
+b = document.querySelector("#wordLyric");
 const animateWord = function (now, unit) {
   if (unit.startTime <= now && unit.endTime > now) {
     if(stt >  musicPosition){
@@ -54,6 +55,11 @@ const animateWord = function (now, unit) {
         a.classList.remove("fly-lyric");
         progressTime = unit.progress(now);
         a.textContent = unit.text;
+        var nowText = document.createElement('p');
+        nowText.textContent = unit.text;
+        nowText.classList.add("txt");
+        nowText.classList.add("fly-lyric");
+        b.appendChild(nowText);
         return;
     }
     a.classList.add("fly-lyric");
@@ -73,6 +79,15 @@ const animatePhrase = function (now, unit) {
   }
   
 };
+
+b.addEventListener("click", function(event){
+    if(!event.target.classList.contains("touch")){
+        event.target.classList.add("touch");
+        console.log("click");
+    }
+    
+});
+
 a.addEventListener("click", function(){
     console.log("click");
     a.classList.add("touch");
