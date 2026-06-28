@@ -209,7 +209,19 @@ function run(songName){
         },
         onTimeUpdate(position) {
             musicPosition = position;
-            
+            if (!songFinished && player.video && position >= player.video.duration-1000) {
+                songFinished = true;
+                console.log("曲が終了しました");
+                const finalScore = document.querySelector("#finalScore");
+                finalScore.textContent = "Score:" + score + "!!!"
+                const background = document.querySelector("#background");
+                background.classList.remove("hidden");
+                menuSelect.removeEventListener('click', menuSelectFunc);
+                const back2 = document.querySelector("#back2");
+                back2.classList.remove("hidden");
+                back2.addEventListener('click',backSelectFunc);
+                return;
+            }
             if(nowBeat != player.findBeat(player.timer.position).position){
                 nowBeat = player.findBeat(player.timer.position).position;
                 let note = document.createElement('p');
@@ -226,19 +238,7 @@ function run(songName){
                 note.classList.add("fly-note");
                 noteContainer.appendChild(note);
             }
-            if (!songFinished && player.video && position >= player.video.duration-300) {
-                songFinished = true;
-                console.log("曲が終了しました");
-                const finalScore = document.querySelector("#finalScore");
-                finalScore.textContent = "Score:" + score + "!!!"
-                const background = document.querySelector("#background");
-                background.classList.remove("hidden");
-                menuSelect.removeEventListener('click', menuSelectFunc);
-                const back2 = document.querySelector("#back2");
-                back2.classList.remove("hidden");
-                back2.addEventListener('click',backSelectFunc);
-                return;
-            }
+            
 
             let flyText = document.querySelector(".fly-lyric");
             if (flyText) {
