@@ -94,10 +94,6 @@ function run(songName){
         songInfo = songData[songName];
         player.video && player.onAppMediaChange(songInfo.url);
     }
-    const playBtn = document.querySelector("#play");
-    const jumpBtn = document.querySelector("#jump");
-    const pauseBtn = document.querySelector("#pause");
-    const rewindBtn = document.querySelector("#rewind");
 
     const menuSelect = document.querySelector('.menuButton');
     const nav = document.querySelector('.nav');
@@ -145,10 +141,6 @@ function run(songName){
                 },
             });
             player.video && (stt = player.video.firstPhrase.startTime);
-            playBtn.addEventListener("click", () => player.video && player.requestPlay());
-            jumpBtn.addEventListener("click", () => player.video && player.requestMediaSeek(player.video.firstPhrase.startTime));
-            pauseBtn.addEventListener("click", () => player.video && player.requestPause());
-            rewindBtn.addEventListener("click", () => player.video && player.requestMediaSeek(0));
             document.getElementById("start-button").addEventListener("click", () => {
 
                 document.getElementById("ready-screen")
@@ -194,7 +186,7 @@ function run(songName){
             console.log("lyricDiffId:" + player.data.video.lyricDiffId);
             let p = player.video.firstWord;
             let phraseP = player.video.firstPhrase;
-            jumpBtn.disabled = !phraseP;
+            
 
             //animateメソッドのセット
             while (p && p.next) {
