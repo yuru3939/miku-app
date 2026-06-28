@@ -12,9 +12,7 @@ let unlocked = false;
 let bgmStarted = false;
 
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
-const spawn = document.getElementById("spawn-point");
-const SpawnOffsetLeft = spawn.offsetLeft;
-const SpawnOffsetTop = spawn.offsetTop;
+
 const scoreBoard = document.querySelector("#scoreBoard");
 let score = 0;
 
@@ -38,8 +36,9 @@ const animateWord = function (now, unit) {
         progressTime = unit.progress(now);
         let nowText = document.createElement('p');
         nowText.textContent = unit.text;
-        nowText.style.left = SpawnOffsetLeft + "px";
-        nowText.style.top = SpawnOffsetTop + Math.random() * 100 - 100 + "px";
+        let spawn = document.getElementById("spawn-point");
+        nowText.style.left = spawn.offsetLeft + "px";
+        nowText.style.top = spawn.offsetTop - Math.random() * 400 + 80 + "px";
         nowText.classList.add("txt");
         nowText.classList.add("fly-lyric");
         wordContainer.appendChild(nowText);
@@ -72,20 +71,64 @@ wordContainer.addEventListener("click", function(event){
     
 });
 
-
-
+const controller = new AbortController();
+const signal = controller.signal;
+first = true;
 function run(songName){
+    
     const player = new Player({
         app: {token:"BFWsFTi8eAJBC7UW"},
         mediaElement: document.querySelector("#media")
     });
-
+    if(first){
+        first = false;
+    }else{
+        songInfo = songData[songName];
+        player.video && player.onAppMediaChange(songInfo.url);
+    }
     const playBtn = document.querySelector("#play");
     const jumpBtn = document.querySelector("#jump");
     const pauseBtn = document.querySelector("#pause");
     const rewindBtn = document.querySelector("#rewind");
 
+    const menuSelect = document.querySelector('.menuButton');
+    const nav = document.querySelector('.nav');
+    let nowToggle = false;
+    const menuSelectFunc = () => {
+        
+        if(!nowToggle){
+            nowToggle = true;
+            player.video && player.requestPause();
+        }else{
+            nowToggle = false;
+            player.video && player.requestPlay();
+        }
+        console.log("menu");
+        menuSelect.classList.toggle("active");
+        nav.classList.toggle("active");
+        
+    };
+    menuSelect.addEventListener('click', menuSelectFunc);
+    const restart = document.querySelector('#restart');
+    restart.addEventListener('click',function(){
+        player.video && player.requestMediaSeek(0);
+        player.video && player.requestPlay();
+        menuSelect.classList.toggle("active");
+        nav.classList.toggle("active");
+    });
+    const backSelect = document.querySelector('#back');
+    const backSelectFunc =() => {
+        /*console.log("a");
+        const gameScreen = document.getElementById("game-screen");
+        songScreen.classList.remove("hidden");
 
+        gameScreen.classList.add("hidden");
+        lyricScreen.classList.add("hidden");
+        menuSelect.classList.toggle("active");
+        nav.classList.toggle("active");*/
+        location.reload();
+    }
+    backSelect.addEventListener('click', backSelectFunc);
 
     player.addListener({
         onAppReady(app){
@@ -118,7 +161,9 @@ function run(songName){
             tmp_artist_name = player.data.song.artist.name;
             document.getElementById("songArtist").textContent = tmp_artist_name;
         },
-
+        onAppMediaChange(songUrl){
+            
+        },
         onTimerReady() {
             document
                 .querySelectorAll("button")
@@ -167,8 +212,13 @@ function run(songName){
             if(opac == 0){
                 flyText.remove();
             }
+        },
+        delete(){
+            player.video && player.requestPause();
         }
-    });
+    },{signal: controller.signal}
+    
+);
 }
 
 // 最初のクリックで音解禁
@@ -207,5 +257,4 @@ function playBGM() {
     }
 }
 
-window.globalFunction = {};
-window.globalFunction.run = run;
+
