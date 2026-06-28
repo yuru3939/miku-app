@@ -9,16 +9,7 @@ const lyricText = document.getElementById("lyric-text");
 let selectedSong = "";
 
 let src;
-// 仮の歌詞データ
-const lyricsData = {
 
-    miku: ["ミ", "ク", "！！！"],
-
-    sora: ["空", "に", "免じて"],
-
-    kotae: ["こ", "た", "え", "て"]
-
-};
 
 songs.forEach(card => {
 
@@ -31,7 +22,7 @@ songs.forEach(card => {
     let songName = card.getAttribute("data-song");
 
     selectedSong = songName;
-
+    run(selectedSong);
     // 曲確認画面
     const readyScreen =
         document.getElementById("ready-screen");
@@ -79,35 +70,6 @@ function playLyrics(lyrics) {
 
     showNext();
 }
-
-
-/*const boat = document.getElementById("boat");
-
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-
-let boatX = mouseX;
-let boatY = mouseY;
-
-window.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
-
-function animateBoat() {
-
-    boatX += (mouseX - boatX) * 0.01;
-    boatY += (mouseY - boatY) * 0.01;
-
-    boat.style.left = boatX + "px";
-    boat.style.top = boatY + "px";
-
-    requestAnimationFrame(animateBoat);
-    
-    console.log("boat test");
-}
-animateBoat();
-*/
 
 const world = document.getElementById("world");
 
@@ -171,25 +133,7 @@ function spawnLyric(text) {
 console.log("歌詞生成");
 
 
-document.getElementById("start-button").addEventListener("click", () => {
 
-    document.getElementById("ready-screen")
-        .classList.add("hidden");
-
-    document.getElementById("game-screen")
-        .classList.remove("hidden");
-
-    document.getElementById("lyric-screen")
-        .classList.remove("hidden");
-
-    run(selectedSong);
-
-    const menuSelect =
-        document.querySelector(".menuButton");
-
-    menuSelect.classList.remove("active");
-
-});
 
 
 

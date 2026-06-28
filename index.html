@@ -10,9 +10,15 @@
     <!-- タイトル画面 -->
     <div id="title-screen">
 
-        <h1 id="title">マジカルミライ2026</h1>
+        <h1 id="title">ミクミク音楽隊</h1>
         <p id="start-text">Click to Start</p>
-        
+        <small>
+            写真提供：浜松・浜名湖ツーリズムビューロー<br>
+            初音ミク：川口重工製初音ミクVer.2.00  made by かにかま<br>
+            "グランドピアノMMDモデル" (https://3d.nicovideo.jp/works/td78830) by Amatsukast, 時の番人<br>
+            is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/)<br>
+            License：CC4.0(BY-NC-SA) (http://creativecommons.org/licenses/by-nc-sa/4.0/) <br>
+        </small>
     </div>
 
     <!-- 波紋 -->
@@ -69,13 +75,13 @@
  <!-- 曲確認画面 -->
     <div id="ready-screen" class="hidden">
 
-    <h3 id="ready-logo">♪ NOW PLAYING ♪</h3>
+    <h3 id="ready-logo">♪ NOW LOADING ♪</h3>
 
     <img id="song-image" alt="ジャケット">
 
     <h2 id="song-title"></h2>
 
-    <button id="start-button">
+    <button disabled id="start-button">
         ▶ PLAY
     </button>
 
@@ -136,13 +142,7 @@
         
         <div id="lyric-text"></div> <!-- 不使用 -->
         
-        <div id="control" style="display: block;">
-            <button id="play" disabled>再生</button>
-            <button id="jump" disabled>歌詞頭出し</button>
-            <button id="pause" disabled>一時停止</button>
-            <button id="rewind" disabled>巻き戻し</button>
-            <span id="position"><strong>-</strong> [ms]</span>
-        </div>
+        
         
         <div id="wordLyric"></div>
     </div>
@@ -170,11 +170,6 @@
     <!-- 効果音 -->
     <audio id="se" src="./sound/Clap.mp3"></audio>
 
-    <!-- BGM -->
-    <audio id="bgm"
-    src="./sound/BGM/みんなみくみくにしてあげる♪.wav"
-    loop></audio>
-    
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/textalive-app-api/dist/index.js"></script>
     

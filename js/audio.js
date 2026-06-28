@@ -3,7 +3,6 @@ const bgm = document.getElementById("bgm");
 const {Player} = TextAliveApp;
 // 音量
 se.volume = 0.5;
-bgm.volume = 0.3;
 
 // 音解禁済み？
 let unlocked = false;
@@ -15,7 +14,7 @@ let bgmStarted = false;
 let songFinished = false;
 let songEndChecker = null;
 
-let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
+
 let nowBeat = 0;
 const scoreBoard = document.querySelector("#scoreBoard");
 let score = 0;
@@ -94,10 +93,6 @@ function run(songName){
         songInfo = songData[songName];
         player.video && player.onAppMediaChange(songInfo.url);
     }
-    const playBtn = document.querySelector("#play");
-    const jumpBtn = document.querySelector("#jump");
-    const pauseBtn = document.querySelector("#pause");
-    const rewindBtn = document.querySelector("#rewind");
 
     const menuSelect = document.querySelector('.menuButton');
     const nav = document.querySelector('.nav');
@@ -145,10 +140,23 @@ function run(songName){
                 },
             });
             player.video && (stt = player.video.firstPhrase.startTime);
-            playBtn.addEventListener("click", () => player.video && player.requestPlay());
-            jumpBtn.addEventListener("click", () => player.video && player.requestMediaSeek(player.video.firstPhrase.startTime));
-            pauseBtn.addEventListener("click", () => player.video && player.requestPause());
-            rewindBtn.addEventListener("click", () => player.video && player.requestMediaSeek(0));
+            document.getElementById("start-button").addEventListener("click", () => {
+
+                document.getElementById("ready-screen")
+                .classList.add("hidden");
+
+                document.getElementById("game-screen")
+                .classList.remove("hidden");
+
+                document.getElementById("lyric-screen")
+                .classList.remove("hidden");
+                const menuSelect =
+                document.querySelector(".menuButton");
+
+                menuSelect.classList.remove("active");
+                player.video && player.requestPlay();
+            });
+            
         },
 
         onVideoReady(video) {
@@ -168,6 +176,7 @@ function run(songName){
             document
                 .querySelectorAll("button")
                 .forEach((btn) => (btn.disabled = false));
+            document.querySelector("#ready-logo").textContent = "♪ NOW PLAYING ♪";
             console.log("ready");
             console.log("beatId:" + player.data.songMap.revisions.beatId);
             console.log("chordId:" + player.data.songMap.revisions.chordId);
@@ -176,7 +185,7 @@ function run(songName){
             console.log("lyricDiffId:" + player.data.video.lyricDiffId);
             let p = player.video.firstWord;
             let phraseP = player.video.firstPhrase;
-            jumpBtn.disabled = !phraseP;
+            
 
             //animateメソッドのセット
             while (p && p.next) {
@@ -256,21 +265,7 @@ function run(songName){
 );
 }
 
-// 最初のクリックで音解禁
-function unlockAudio() {
 
-    if (!unlocked) {
-
-        bgm.play().then(() => {
-
-            bgm.pause();
-            bgm.currentTime = 0;
-
-        }).catch(() => {});
-
-        unlocked = true;
-    }
-}
 
 // 効果音再生
 function playSE() {
@@ -280,16 +275,5 @@ function playSE() {
     se.play().catch(() => {});
 }
 
-// BGM再生
-function playBGM() {
-
-    // 1回だけ
-    if (!bgmStarted) {
-
-        bgm.play().catch(() => {});
-
-        bgmStarted = true;
-    }
-}
 
 
