@@ -9,16 +9,7 @@ const lyricText = document.getElementById("lyric-text");
 let selectedSong = "";
 
 let src;
-// 仮の歌詞データ
-const lyricsData = {
 
-    miku: ["ミ", "ク", "！！！"],
-
-    sora: ["空", "に", "免じて"],
-
-    kotae: ["こ", "た", "え", "て"]
-
-};
 
 songs.forEach(card => {
 
@@ -79,35 +70,6 @@ function playLyrics(lyrics) {
 
     showNext();
 }
-
-
-/*const boat = document.getElementById("boat");
-
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-
-let boatX = mouseX;
-let boatY = mouseY;
-
-window.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-});
-
-function animateBoat() {
-
-    boatX += (mouseX - boatX) * 0.01;
-    boatY += (mouseY - boatY) * 0.01;
-
-    boat.style.left = boatX + "px";
-    boat.style.top = boatY + "px";
-
-    requestAnimationFrame(animateBoat);
-    
-    console.log("boat test");
-}
-animateBoat();
-*/
 
 const world = document.getElementById("world");
 

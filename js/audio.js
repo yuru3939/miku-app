@@ -3,7 +3,6 @@ const bgm = document.getElementById("bgm");
 const {Player} = TextAliveApp;
 // 音量
 se.volume = 0.5;
-bgm.volume = 0.3;
 
 // 音解禁済み？
 let unlocked = false;
@@ -15,7 +14,7 @@ let bgmStarted = false;
 let songFinished = false;
 let songEndChecker = null;
 
-let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
+
 let nowBeat = 0;
 const scoreBoard = document.querySelector("#scoreBoard");
 let score = 0;
@@ -266,21 +265,7 @@ function run(songName){
 );
 }
 
-// 最初のクリックで音解禁
-function unlockAudio() {
 
-    if (!unlocked) {
-
-        bgm.play().then(() => {
-
-            bgm.pause();
-            bgm.currentTime = 0;
-
-        }).catch(() => {});
-
-        unlocked = true;
-    }
-}
 
 // 効果音再生
 function playSE() {
@@ -290,16 +275,5 @@ function playSE() {
     se.play().catch(() => {});
 }
 
-// BGM再生
-function playBGM() {
-
-    // 1回だけ
-    if (!bgmStarted) {
-
-        bgm.play().catch(() => {});
-
-        bgmStarted = true;
-    }
-}
 
 

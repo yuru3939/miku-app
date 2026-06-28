@@ -26,11 +26,7 @@ window.addEventListener("click", (event) => {
 
         started = true;
 
-        unlockAudio();
-
         playSE();
-
-        playBGM();
 
         setTimeout(() => {
 
