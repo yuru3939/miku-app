@@ -75,6 +75,11 @@
                 <span  id="songArtist">-</span>
                 <span  id="scoreBoard">score:0</span>
             </div>
+            <button class="menuButton">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
 
         <div id="bottom-bar">
@@ -97,9 +102,11 @@
 
         <!-- ピアノ＆ミク -->
         <div id="miku"></div>
-        <div id="piano"></div>
+        <div id="piano">
+            <div id="spawn-point"></div>
+        </div>
 
-        <div id="spawn-point"></div>
+        
     
     </div>
 
@@ -119,7 +126,19 @@
         <div id="wordLyric"></div>
     </div>
        
-
+    <nav class="nav">
+        <div class="back"></div>
+        <ul class="nav-items">
+            <li class="nav-item"><h1>メニュー</h1></li>
+            <li class="nav-item"><button class="nav-button" id="restart">リスタート</button></li>
+            <li class="nav-item"><button class="nav-button" id="back">タイトルに戻る</button></li>
+        </ul>
+        <button class="menuButton active">
+                <span></span>
+                <span></span>
+                <span></span>
+        </button>
+    </nav>
      
      
 
