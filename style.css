@@ -9,6 +9,17 @@ body {
     
 }
 
+small {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    line-height: 1.4;
+    z-index: 10;
+}
+
 /* =========================
    タイトル画面
 ========================= */
@@ -859,3 +870,8 @@ li{
 
 }
 
+#start-button:disabled {
+    opacity: 0.5;
+    transform:scale(1);
+    cursor: not-allowed;
+}

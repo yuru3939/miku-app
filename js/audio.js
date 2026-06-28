@@ -149,6 +149,23 @@ function run(songName){
             jumpBtn.addEventListener("click", () => player.video && player.requestMediaSeek(player.video.firstPhrase.startTime));
             pauseBtn.addEventListener("click", () => player.video && player.requestPause());
             rewindBtn.addEventListener("click", () => player.video && player.requestMediaSeek(0));
+            document.getElementById("start-button").addEventListener("click", () => {
+
+                document.getElementById("ready-screen")
+                .classList.add("hidden");
+
+                document.getElementById("game-screen")
+                .classList.remove("hidden");
+
+                document.getElementById("lyric-screen")
+                .classList.remove("hidden");
+                const menuSelect =
+                document.querySelector(".menuButton");
+
+                menuSelect.classList.remove("active");
+                player.video && player.requestPlay();
+            });
+            
         },
 
         onVideoReady(video) {
@@ -168,6 +185,7 @@ function run(songName){
             document
                 .querySelectorAll("button")
                 .forEach((btn) => (btn.disabled = false));
+            document.querySelector("#ready-logo").textContent = "♪ NOW PLAYING ♪";
             console.log("ready");
             console.log("beatId:" + player.data.songMap.revisions.beatId);
             console.log("chordId:" + player.data.songMap.revisions.chordId);

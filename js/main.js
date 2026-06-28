@@ -31,7 +31,7 @@ songs.forEach(card => {
     let songName = card.getAttribute("data-song");
 
     selectedSong = songName;
-
+    run(selectedSong);
     // 曲確認画面
     const readyScreen =
         document.getElementById("ready-screen");
@@ -171,25 +171,7 @@ function spawnLyric(text) {
 console.log("歌詞生成");
 
 
-document.getElementById("start-button").addEventListener("click", () => {
 
-    document.getElementById("ready-screen")
-        .classList.add("hidden");
-
-    document.getElementById("game-screen")
-        .classList.remove("hidden");
-
-    document.getElementById("lyric-screen")
-        .classList.remove("hidden");
-
-    run(selectedSong);
-
-    const menuSelect =
-        document.querySelector(".menuButton");
-
-    menuSelect.classList.remove("active");
-
-});
 
 
 
