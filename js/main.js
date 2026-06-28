@@ -28,7 +28,7 @@ songs.forEach(card => {
         let songName = card.getAttribute("data-song");
 
         // 曲再生
-        window.globalFunction.run(songName);
+        run(songName);
 
         // 画面切替
         const gameScreen = document.getElementById("game-screen");
@@ -37,8 +37,9 @@ songs.forEach(card => {
         gameScreen.classList.remove("hidden");
         lyricScreen.classList.remove("hidden");
         //gameScreen.classList.remove("hidden");
-
-        spawnLyric("aaaaaaaaaaaaaaaaaaa");
+        const menuSelect = document.querySelector('.menuButton');
+        menuSelect.classList.remove("active");
+        //spawnLyric("aaaaaaaaaaaaaaaaaaa");
         // 歌詞開始(旧)
         //playLyrics(lyricsData[songId]);
 
