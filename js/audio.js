@@ -16,13 +16,14 @@ let songFinished = false;
 let songEndChecker = null;
 
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
-
+let nowBeat = 0;
 const scoreBoard = document.querySelector("#scoreBoard");
 let score = 0;
 
 let progressTime = 1;
 let stt = 0;
 const wordContainer = document.querySelector("#wordLyric");
+const noteContainer = document.querySelector("#noteContainer");
 //　単語表示
 const animateWord = function (now, unit) {
   if (unit.startTime <= now && unit.endTime > now) {
@@ -199,7 +200,23 @@ function run(songName){
         },
         onTimeUpdate(position) {
             musicPosition = position;
-
+            
+            if(nowBeat != player.findBeat(player.timer.position).position){
+                nowBeat = player.findBeat(player.timer.position).position;
+                let note = document.createElement('p');
+                note.textContent = "♪";
+                let spawn = document.getElementById("spawn-point");
+                note.style.left = spawn.offsetLeft -170 + Math.random() * 100 -100 + "px";
+                note.style.top = spawn.offsetTop -80 - Math.random() * 50 + "px";
+                let r = Math.floor(Math.random() * 255);
+                let g = Math.floor(Math.random() * 255);
+                let b = Math.floor(Math.random() * 255);
+                let color = `rgb(${r},${g},${b})`;
+                note.style.color = color;
+                note.classList.add("txt");
+                note.classList.add("fly-note");
+                noteContainer.appendChild(note);
+            }
             if (!songFinished && player.video && position >= player.video.duration-300) {
                 songFinished = true;
                 console.log("曲が終了しました");
@@ -220,6 +237,14 @@ function run(songName){
                 let opac = styles.getPropertyValue('opacity');
                 if (opac == 0) {
                     flyText.remove();
+                }
+            }
+            let flyNote = document.querySelector(".fly-note");
+            if (flyNote) {
+                let styles = getComputedStyle(flyNote);
+                let opac = styles.getPropertyValue('opacity');
+                if (opac == 0) {
+                    flyNote.remove();
                 }
             }
         },
