@@ -190,3 +190,39 @@ document.getElementById("start-button").addEventListener("click", () => {
     menuSelect.classList.remove("active");
 
 });
+
+
+
+// 泡飛ばし
+function spawnBubble(){
+
+    const container =
+        document.getElementById("bubble-container");
+
+    const bubble =
+        document.createElement("div");
+
+    bubble.classList.add("bubble");
+
+    bubble.style.left =
+        Math.random() * window.innerWidth + "px";
+
+    bubble.style.bottom = "-20px";
+
+    const size =
+        Math.random() * 20 + 5;
+
+    bubble.style.width = size + "px";
+    bubble.style.height = size + "px";
+
+    container.appendChild(bubble);
+
+    setTimeout(()=>{
+
+        bubble.remove();
+
+    },8000);
+
+}
+
+setInterval(spawnBubble,500);
