@@ -2,7 +2,7 @@ body {
     margin: 0;
     overflow: hidden;
     position: relative;
-    background: #ff0000;
+    background:  black;
     color: white;
 
     font-family: sans-serif;
@@ -495,7 +495,7 @@ body {
     pointer-events: none;
 
     /* デバッグ用（あとで消す） */
-    background: red;
+    background: none;
 }
 
 .menuButton {
@@ -630,7 +630,84 @@ li{
     top: 18vh;   
     border-radius: 5px;
     pointer-events: none;
-    background: red;
+    background:  transparent;
     z-index: -1;
     opacity: 0;
+}
+
+
+/*=========================
+ 曲確認画面
+=========================*/
+
+#ready-screen{
+
+    position:absolute;
+
+    width:100%;
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    gap:25px;
+
+    /* 少し透けた黒 */
+    background:rgba(0,0,0,0.92);
+
+    z-index:500;
+}
+
+#ready-logo{
+
+    color:white;
+
+    font-size:22px;
+
+    letter-spacing:8px;
+
+    opacity:0.8;
+}
+
+#song-image{
+
+    width:420px;
+
+    border-radius:15px;
+
+    box-shadow:0 0 40px rgba(255,255,255,0.2);
+
+    transition:0.3s;
+}
+
+#song-title{
+
+    font-size:42px;
+
+    color:white;
+
+    letter-spacing:3px;
+
+    text-align:center;
+}
+
+#start-button{
+
+    width:250px;
+    height:70px;
+
+    font-size:28px;
+
+    cursor:pointer;
+}
+
+#start-button:hover{
+
+    transform:scale(1.05);
+
+    background:#dddddd;
 }

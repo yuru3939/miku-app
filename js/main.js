@@ -6,6 +6,8 @@ const songs = document.querySelectorAll(".song-card");
 const lyricScreen = document.getElementById("lyric-screen");
 const lyricText = document.getElementById("lyric-text");
 
+let selectedSong = "";
+
 let src;
 // 仮の歌詞データ
 const lyricsData = {
@@ -21,29 +23,36 @@ const lyricsData = {
 songs.forEach(card => {
 
     card.addEventListener("click", () => {
-        console.log("setBGM");
-        playSE();
 
-        // 曲ID
-        let songName = card.getAttribute("data-song");
+    console.log("setBGM");
+    playSE();
 
-        // 曲再生
-        run(songName);
+    // 曲名取得
+    let songName = card.getAttribute("data-song");
 
-        // 画面切替
-        const gameScreen = document.getElementById("game-screen");
-        songScreen.classList.add("hidden");
+    selectedSong = songName;
 
-        gameScreen.classList.remove("hidden");
-        lyricScreen.classList.remove("hidden");
-        //gameScreen.classList.remove("hidden");
-        const menuSelect = document.querySelector('.menuButton');
-        menuSelect.classList.remove("active");
-        //spawnLyric("aaaaaaaaaaaaaaaaaaa");
-        // 歌詞開始(旧)
-        //playLyrics(lyricsData[songId]);
+    // 曲確認画面
+    const readyScreen =
+        document.getElementById("ready-screen");
 
-    });
+    const songImage =
+        document.getElementById("song-image");
+
+    const songTitle =
+        document.getElementById("song-title");
+
+    // 画面切替
+    songScreen.classList.add("hidden");
+
+    readyScreen.classList.remove("hidden");
+
+    // 曲情報表示
+    songTitle.textContent = songName;
+
+    songImage.src = "image/" + songName + ".png";
+
+});
 
 });
 
@@ -161,3 +170,23 @@ function spawnLyric(text) {
 
 console.log("歌詞生成");
 
+
+document.getElementById("start-button").addEventListener("click", () => {
+
+    document.getElementById("ready-screen")
+        .classList.add("hidden");
+
+    document.getElementById("game-screen")
+        .classList.remove("hidden");
+
+    document.getElementById("lyric-screen")
+        .classList.remove("hidden");
+
+    run(selectedSong);
+
+    const menuSelect =
+        document.querySelector(".menuButton");
+
+    menuSelect.classList.remove("active");
+
+});
