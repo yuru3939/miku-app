@@ -11,6 +11,10 @@ let unlocked = false;
 // BGM開始済み？
 let bgmStarted = false;
 
+// 曲が終了したかどうか
+let songFinished = false;
+let songEndChecker = null;
+
 let songUrl = "http://www.youtube.com/watch?v=3Wtx6k2vInU"
 
 const scoreBoard = document.querySelector("#scoreBoard");
@@ -74,6 +78,9 @@ wordContainer.addEventListener("click", function(event){
 const controller = new AbortController();
 const signal = controller.signal;
 first = true;
+const backSelectFunc =() => {
+    location.reload();
+}
 function run(songName){
     
     const player = new Player({
@@ -111,23 +118,15 @@ function run(songName){
     menuSelect.addEventListener('click', menuSelectFunc);
     const restart = document.querySelector('#restart');
     restart.addEventListener('click',function(){
+        songFinished = false;
+        nowToggle = false;
         player.video && player.requestMediaSeek(0);
         player.video && player.requestPlay();
         menuSelect.classList.toggle("active");
         nav.classList.toggle("active");
     });
     const backSelect = document.querySelector('#back');
-    const backSelectFunc =() => {
-        /*console.log("a");
-        const gameScreen = document.getElementById("game-screen");
-        songScreen.classList.remove("hidden");
-
-        gameScreen.classList.add("hidden");
-        lyricScreen.classList.add("hidden");
-        menuSelect.classList.toggle("active");
-        nav.classList.toggle("active");*/
-        location.reload();
-    }
+    
     backSelect.addEventListener('click', backSelectFunc);
 
     player.addListener({
@@ -178,7 +177,7 @@ function run(songName){
             let phraseP = player.video.firstPhrase;
             jumpBtn.disabled = !phraseP;
 
-            // set `animate` method
+            //animateメソッドのセット
             while (p && p.next) {
                 console.log("firstphrase:" + p + "| next:" + p.next);
                 p.animate = animateWord;
@@ -199,18 +198,29 @@ function run(songName){
             }
         },
         onTimeUpdate(position) {
-            //console.log("update");
             musicPosition = position;
-            //console.log(player.findBeat(player.timer.position).position);
-            //console.log("a",unit.progress(now));
-            //console.log("b",player.timer.position);
+
+            if (!songFinished && player.video && position >= player.video.duration-300) {
+                songFinished = true;
+                console.log("曲が終了しました");
+                const finalScore = document.querySelector("#finalScore");
+                finalScore.textContent = "Score:" + score + "!!!"
+                const background = document.querySelector("#background");
+                background.classList.remove("hidden");
+                menuSelect.removeEventListener('click', menuSelectFunc);
+                const back2 = document.querySelector("#back2");
+                back2.classList.remove("hidden");
+                back2.addEventListener('click',backSelectFunc);
+                return;
+            }
 
             let flyText = document.querySelector(".fly-lyric");
-            let styles = getComputedStyle(flyText);
-            let opac = styles.getPropertyValue('opacity');
-            //console.log("opacity",opac);
-            if(opac == 0){
-                flyText.remove();
+            if (flyText) {
+                let styles = getComputedStyle(flyText);
+                let opac = styles.getPropertyValue('opacity');
+                if (opac == 0) {
+                    flyText.remove();
+                }
             }
         },
         delete(){
