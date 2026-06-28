@@ -210,7 +210,7 @@ function spawnBubble(){
     bubble.style.bottom = "-20px";
 
     const size =
-        Math.random() * 20 + 5;
+        Math.random() * 75 + 5;
 
     bubble.style.width = size + "px";
     bubble.style.height = size + "px";
