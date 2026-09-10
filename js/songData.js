@@ -1,6 +1,6 @@
 const songData = {
     こたえて: {
-        url: "https://piapro.jp/t/6W2N/20251215164617",
+        url: "https://piapro.jp/t/6W2N",
         // 音楽地図訂正履歴
         beatId: 4827293,
         chordId: 2963754,
@@ -12,7 +12,7 @@ const songData = {
         lyricDiffId: 28645
     },
     アフター・ザ・カーテン: {
-        url: "https://piapro.jp/t/zoqO/20251214200738",
+        url: "https://piapro.jp/t/zoqO",
         // 音楽地図訂正履歴
         beatId: 4827294,
         chordId: 2963755,
@@ -24,7 +24,7 @@ const songData = {
         lyricDiffId: 28627
     },
     シャッターチャンス: {
-        url: "https://piapro.jp/t/PNpQ/20251209170719",
+        url: "https://piapro.jp/t/PNpQ",
         // 音楽地図訂正履歴
         beatId: 4827295,
         chordId: 2963756,
@@ -36,7 +36,7 @@ const songData = {
         lyricDiffId: 28628
     },
     世界最後の音楽隊: {
-        url: "https://piapro.jp/t/B3yJ/20251215061727",
+        url: "https://piapro.jp/t/B3yJ",
         // 音楽地図訂正履歴
         beatId: 4827296,
         chordId: 2963757,
@@ -48,7 +48,7 @@ const songData = {
         lyricDiffId: 28629
     },
     トリツクロジー: {
-        url: "https://piapro.jp/t/QBdL/20251215094303",
+        url: "https://piapro.jp/t/QBdL",
         // 音楽地図訂正履歴
         beatId: 4827297,
         chordId: 2963758,
@@ -60,7 +60,7 @@ const songData = {
         lyricDiffId: 28630
     },
     TAKEOVER: {
-        url: "https://piapro.jp/t/E2i3/20251215092113",
+        url: "https://piapro.jp/t/E2i3",
         // 音楽地図訂正履歴
         beatId: 4827298,
         chordId: 2963759,
